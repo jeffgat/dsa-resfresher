@@ -35,7 +35,6 @@ const multiplePointers = (arr, num) => {
     return false;
 };
 
-slidingWindow([2,6,9,2,1,8], 3)
 const slidingWindow = (arr, num) => {
     let max = 0;
     let temp = 0;
@@ -71,27 +70,3 @@ const divideAndConquer = (arr, num) => {
 
     return -1;
 };
-
-const test = (substr, str) => {
-    // add whatever parameters you deem necessary - good luck!
-    let a = 0;
-    let b = 0;
-
-    while (b < str.length - 1) {
-        // what's my ending case?
-        if (substr[a] === str[b]) {
-            a++;
-            b++;
-            if (a === substr.length - 1) {
-                return true;
-            }
-        } else {
-            b++;
-        }
-        // console.log('a', substr[a]);
-        // console.log('b', str[b]);
-    }
-    return false;
-};
-
-test('sing', 'sting');
