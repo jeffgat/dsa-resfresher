@@ -99,13 +99,50 @@ function maxSubarraySum(arr, num) {
 }
 
 const minSubArrayLen = (arr, num) => {
-    let subArrLength = arr.length;
+    let total = 0;
+    let start = 0;
+    let end = 0;
+    let minLength = 9999;
+
+    while (start < arr.length) {
+        // initialize window
+        if (total < num && end < arr.length) {
+            // move the window right
+            total += arr[end];
+            end++;
+        } else if (total >= num) {
+            // window size is the diff between left and right edges of the window
+            let diff = end - start;
+            // reassign window size here
+            if (minLength > diff) {
+                minLength = diff;
+            }
+            // shrink window from the left
+            total -= arr[start];
+            start++;
+        } else {
+            break;
+        }
+    }
+    // if unchanged, no match
+    return minLength === 9999 ? 0 : minLength;
 };
 
-minSubArrayLen([2, 3, 1, 2, 4, 3], 7); // 2 -> because [4,3] is the smallest subarray
-minSubArrayLen([2, 1, 6, 5, 4], 9); // 2 -> because [5,4] is the smallest subarray
-minSubArrayLen([3, 1, 7, 11, 2, 9, 8, 21, 62, 33, 19], 52); // 1 -> because [62] is greater than 52
-minSubArrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 39); // 3
-minSubArrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 55); // 5
-minSubArrayLen([4, 3, 3, 8, 1, 2, 3], 11); // 2
-minSubArrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 95); // 0
+function findLongestSubstring(str) {
+    let longest = 0;
+    let seen = {};
+    let start = 0;
+
+    for (let i = 0; i < str.length; i++) {
+        let char = str[i];
+        if (seen[char]) {
+            // start = largest between start + seen[char]
+            start = Math.max(start, seen[char]);
+        }
+        // index - beginning of substring + 1 (to include current in count)
+        longest = Math.max(longest, i - start + 1);
+        // store the index of the next char so as to not double count
+        seen[char] = i + 1;
+    }
+    return longest;
+}
