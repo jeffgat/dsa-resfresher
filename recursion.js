@@ -1,3 +1,4 @@
+// recursion is pushing and then popping off of a stack
 // 1. simplest case -> this will be your base case
 // 2. examples, visualize
 // 3. relate hard cases to simple cases
